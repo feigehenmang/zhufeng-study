@@ -39,7 +39,7 @@ class ListNode {
         this.next = null
     }
 }
-console.log(removeNnode(tree, 2))
+// console.log(removeNnode(tree, 2))
 function removeNnode(queue, n) {
     const dummyNode = new ListNode()
     dummyNode.next = queue
@@ -57,4 +57,33 @@ function removeNnode(queue, n) {
     start.next = start.next.next
     // console.log(JSON.stringify(queue))
     return queue
+}
+
+// function reverseNode(tree) {
+//     let pre = null, curr = tree
+//     while (curr) {
+//         const next = curr.next
+//         curr.next = pre
+//         pre = curr
+//         curr = next
+//     }
+//     return pre
+// }
+console.log(JSON.stringify(reverseNode(tree)))
+
+
+function reverseNode(tree) {
+    let pre = null, curr = tree
+    while (curr) {
+        const next = curr.next // 取出下个指针并保留
+        curr.next = pre // 修改当前项指针到上一项
+        pre = curr // 上一项+1
+        curr = next // 下一项+1
+    }
+    return pre
+}
+
+// 反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
+function reverseMtoNNode(tree, m, n) {
+
 }
