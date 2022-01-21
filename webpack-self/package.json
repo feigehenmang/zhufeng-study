@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --open",
-    "build": "webpack --config webpack.config.prod.js",
-    "dev:prod": "webpack-dev-server --open --config webpack.config.prod.js"
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +32,8 @@
     "webpack-dev-server": "^4.7.3"
   },
   "dependencies": {
-    "progress-bar-webpack-plugin": "^2.1.0"
+    "global": "^4.4.0",
+    "progress-bar-webpack-plugin": "^2.1.0",
+    "server": "^1.0.37"
   }
 }
