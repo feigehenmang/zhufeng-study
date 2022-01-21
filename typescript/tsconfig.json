@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2016", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "module": "commonjs", /* Specify what module code is generated. */
+    "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
+    "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
+    "strict": true, /* Enable all strict type-checking options. */
+    "alwaysStrict": true, // 是否使用use strict
+    "strictNullChecks": false,
+    /*
+      strict 相当于
+      --noImplicitAny 	在表达式和声明上有隐含的 any类型时报错, 
+      --noImplicitThis,  当 this表达式的值为 any类型的时候，生成一个错误。
+      --alwaysStrict，  以严格模式解析并为每个源文件生成 "use strict"语句
+      --strictNullChecks 在严格的 null检查模式下， null和 undefined值不包含在任何类型里，只允许用它们自己和 any来赋值（有个例外， undefined可以赋值到 void）。
+      --strictFunctionTypes 禁用函数参数双向协变检查。
+      --strictPropertyInitialization。 确保类的非undefined属性已经在构造函数里初始化。若要令此选项生效，需要同时启用--strictNullChecks。
+    */
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  }
+}
