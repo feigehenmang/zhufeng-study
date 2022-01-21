@@ -18,6 +18,9 @@ Promise.resolve().then(() => {
 })
 
 /*
-    [1, 2, Promise.resolve(Promise.resolve('hello')), ]
-    
+   1 ((new Promise))
+   2 (then new Promise)
+   3
+   4
+   k
 */
