@@ -10,6 +10,8 @@ new Promise(resolve => {
     setTimeout(() => {
         resolve(5)
     })
+}).then(res => console.log(res)).then(() => {
+    return new Promise(resolve => resolve(5))
 }).then(res => console.log(res))
 // const readFile = (path) => new Promise((resolve, reject) => {
 //     fs.readFile(path, 'utf-8', (err, data) => {
