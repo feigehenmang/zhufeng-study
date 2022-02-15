@@ -28,3 +28,25 @@ logSex(Sex2.Boy)
 let bol2: boolean = false
 bol2 = null
 bol2 = undefined
+
+
+interface Mounted {
+    onMounted: () => void
+}
+interface Updated {
+    onUpdated: () => void
+}
+
+class Vue implements Mounted, Updated {
+    onMounted() {
+
+    }
+    onUpdated() {
+
+    }
+}
+class UpdateVue implements Updated {
+    onUpdated() {
+
+    }
+}
