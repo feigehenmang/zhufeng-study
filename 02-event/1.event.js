@@ -1,6 +1,6 @@
 Promise.resolve().then(() => {
     console.log(1);
-    return new Promise(resolve => resolve(new Promise(resolve => resolve('k'))))
+    return new Promise(resolve => resolve(22))
 }).then((res) => {
     console.log(res)
 })
