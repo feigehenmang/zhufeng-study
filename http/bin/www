@@ -1,0 +1,13 @@
+#! /usr/bin/env node
+const { Command } = require('commander')
+const program = new Command()
+const config = require('./config')
+const Server = require('../index')
+
+Object.values(config).forEach(c => {
+    program.option(c.content, c.desc, c.default)
+})
+
+new Server(program.opts()).start()
+
+program.parse(process.argv)
