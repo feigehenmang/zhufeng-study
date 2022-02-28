@@ -3,11 +3,22 @@ const { Command } = require('commander')
 const program = new Command()
 const config = require('./config')
 const Server = require('../index')
+const log = require('../log')
 
 Object.values(config).forEach(c => {
     program.option(c.content, c.desc, c.default)
 })
 
-new Server(program.opts()).start()
+const server = new Server(program.opts()).start()
+process.on('SIGINT', function () {
+    log.stopedLog()
+    server && server.close()
+    process.exit();
+});
 
+process.on('SIGTERM', function () {
+    log.stopedLog()
+    server && server.close()
+    process.exit();
+});
 program.parse(process.argv)
