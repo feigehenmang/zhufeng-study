@@ -7,6 +7,7 @@ app.use((context, next) => {
     // console.log(context.path)
     console.log(1)
     next()
+    console.log(4)
     context.response.body = 4 +''
     // res.end(4)
 })
