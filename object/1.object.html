@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const obj = {}
+        const cObj = Object.create(null)
+        console.log(obj, cObj)
+        console.log(obj.__proto__) // object
+        console.log(obj.__proto__.__proto__) // null
+        // mdn Object https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object
+        //https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+        // Object.create Object.assign
+        /**
+         * Object.create
+         * 创建一个继承传入参数的对象 即新创建对象的[[Prototype]]指向传入参数
+         * 如果传入null 则创建了一个干净的对象，原型链上没有任何方法 属性
+         * /
+        /**
+         * 每个对象都有一个私有属性 __proto__ 指向该对象构造函数的prototype
+         * 即 instance.__proto__ === Constructor.prototype
+         * 对象的[[Prototype]]指向instance.__proto__(Constructor.prototype)
+         * null 没有[[Prototype]]
+         * 原型指的是构造函数的prototype
+         * 原型链指的是由构造函数的prototype往上递归查询而得到的引用链关系
+        */
+        function getPrototypes(obj) {
+            let proto = obj
+            let result = []
+            while (proto) {
+                result.push(proto)
+                proto = proto.__proto__
+            }
+            return result
+        }
+        console.log(getPrototypes(obj), getPrototypes(cObj))
+    </script>
+</body>
+
+</html>
