@@ -1,12 +1,13 @@
 const middlewares = [
     async function (index, next) {
+        console.log(next.toString())
         console.log(index)
         await next()
         console.log(index)
     },
-    async (v, next) =>{
+    async (v, next) => {
         console.log(v)
-        throw new Error('123')
+        // throw new Error('123')
         await next()
         console.log(v)
     },
