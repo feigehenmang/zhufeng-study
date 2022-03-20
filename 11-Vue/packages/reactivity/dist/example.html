@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="./reactivity.iife.js"></script>
+    <!-- <script src="../../../node_modules/@vue/reactivity/dist/reactivity.global.js"></script> -->
+
+    <script>
+        const { effect, reactive, computed } = VueReactivity
+
+        const data = reactive({ count: 2 })
+        const val = computed(() => {
+            // 执行computed这个effect，会存储effect和count的关系，一旦count发生变化就会触发调度器
+            return data.count * 2
+        })
+        console.log(val)
+        effect(() => {
+            // 这个effect存储在computed的deps中
+            document.getElementById('app').innerHTML = val.value
+        })
+
+        data.count = 10
+        // const data = reactive({ name: 'test' })
+        // let flag = true
+        // const runner = effect(() => {
+        //     // data.name = Math.random()
+        //     document.getElementById('app').innerHTML = data.name
+        // }, {
+        //     scheduler() {
+        //         console.log('test')
+        //         if (flag) {
+        //             runner()
+        //             flag = false
+        //         }
+        //     }
+        // })
+        // data.name = '测试'
+        // data.name = '测试2'
+        // document.onclick = () => {
+        //     flag = true
+        //     runner()
+        // }
+        // runner.effect.stop()
+        // setTimeout(() => {
+        //     data.name = 'test2'
+        //     runner()
+        // }, 3000)
+    </script>
+</body>
+
+</html>
