@@ -14,20 +14,36 @@
     <!-- <script src="../../../node_modules/@vue/reactivity/dist/reactivity.global.js"></script> -->
 
     <script>
-        const { effect, reactive, computed } = VueReactivity
+        const { effect, reactive, computed, watch, ref, toRefs } = VueReactivity
 
-        const data = reactive({ count: 2 })
-        const val = computed(() => {
-            // 执行computed这个effect，会存储effect和count的关系，一旦count发生变化就会触发调度器
-            return data.count * 2
-        })
-        console.log(val)
+        // const data = reactive({ count: 2 })
+        // watch(() => data.count, (v, ov) => {
+        //     console.log(v, ov)
+        // })
+        // const count = ref(0)
+        const state = reactive({ name: 'k' })
+        const { name } = toRefs(state)
+        // watch(data, (v, ov) => {
+        //     console.log(v, ov)
+        // })
         effect(() => {
-            // 这个effect存储在computed的deps中
-            document.getElementById('app').innerHTML = val.value
+            app.innerHTML = name.value
         })
+        name.value = 3
 
-        data.count = 10
+
+
+        // const val = computed(() => {
+        //     // 执行computed这个effect，会存储effect和count的关系，一旦count发生变化就会触发调度器
+        //     return data.count * 2
+        // })
+        // console.log(val)
+        // effect(() => {
+        //     // 这个effect存储在computed的deps中
+        //     document.getElementById('app').innerHTML = val.value
+        // })
+
+        // data.count = 10
         // const data = reactive({ name: 'test' })
         // let flag = true
         // const runner = effect(() => {

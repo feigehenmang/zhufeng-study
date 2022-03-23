@@ -22,7 +22,11 @@ var VueReactivity = (() => {
   __export(src_exports, {
     computed: () => computed,
     effect: () => effect,
-    reactive: () => reactive
+    reactive: () => reactive,
+    ref: () => ref,
+    toRef: () => toRef,
+    toRefs: () => toRefs,
+    watch: () => watch
   });
 
   // packages/reactivity/src/effect.ts
@@ -189,6 +193,96 @@ var VueReactivity = (() => {
       setter = getterOrOptions.set;
     }
     return new ComputedRefImpl(getter, setter);
+  }
+
+  // packages/reactivity/src/watch.ts
+  var tranverse = (obj, set = /* @__PURE__ */ new Set()) => {
+    if (isObject(obj)) {
+      if (set.has(obj)) {
+        return obj;
+      }
+      set.add(obj);
+      for (const key in obj) {
+        return tranverse(obj[key]);
+      }
+    } else {
+      return obj;
+    }
+  };
+  function isReactive(v) {
+    return !!(v && v["__is__reactive" /* ISReactive */]);
+  }
+  function watch(objOrFn, callback) {
+    let getter;
+    if (isReactive(objOrFn)) {
+      getter = () => {
+        return tranverse(objOrFn);
+      };
+    } else {
+      getter = objOrFn;
+    }
+    let oldValue;
+    let clear;
+    let cleanup = (fn) => {
+      clear = fn;
+    };
+    const cb = () => {
+      clear && clear();
+      const newValue = effect2.run();
+      callback(newValue, oldValue, cleanup);
+      oldValue = newValue;
+    };
+    const effect2 = new ActiveEffect(getter, cb);
+    oldValue = effect2.run();
+  }
+
+  // packages/reactivity/src/ref.ts
+  var toReactive = (v) => {
+    return isObject(v) ? reactive(v) : v;
+  };
+  var RefImpl = class {
+    constructor(rawValue) {
+      this.rawValue = rawValue;
+      this.dep = /* @__PURE__ */ new Set();
+      this.__v_isRef = true;
+      this._value = toReactive(rawValue);
+    }
+    get value() {
+      if (activeEffect) {
+        trackEffects(this.dep);
+      }
+      return this._value;
+    }
+    set value(v) {
+      this._value = v;
+      triggerEffects(this.dep);
+    }
+  };
+  function ref(v) {
+    return new RefImpl(v);
+  }
+  var ObjectRefImpl = class {
+    constructor(target, key) {
+      this.target = target;
+      this.key = key;
+      this.__v_isRef = true;
+    }
+    get value() {
+      return this.target[this.key];
+    }
+    set value(v) {
+      this.target[this.key] = v;
+    }
+  };
+  function toRef(target, key) {
+    return new ObjectRefImpl(target, key);
+  }
+  function toRefs(v) {
+    const result = Array.isArray(v) ? [] : {};
+    for (const key in v) {
+      result[key] = toRef(v, key);
+    }
+    return result;
   }
   return __toCommonJS(src_exports);
 })();
