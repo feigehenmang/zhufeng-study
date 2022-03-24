@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./reactivity.iife.js"></script>
+    <!-- <script src="../../../node_modules/vue/dist/vue.global.js"></script> -->
+    <script>
+        // const { effect, reactive} = Vue
+        const { effect, reactive} = VueReactivity
+
+        const state = reactive({name: 'zyb', age: 13})
+        effect(() => {
+            console.log('test')
+            state.age = Math.random()
+            app.innerHTML = `${state.name} 今年${state.age}了`
+        })
+        setInterval(() => {
+            state.age ++
+        }, 1000)
+    </script>
+</body>
+</html>

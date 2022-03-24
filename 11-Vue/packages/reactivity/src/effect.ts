@@ -11,7 +11,7 @@ export class ActiveEffect {
   active = true;
   parent = undefined;
   deps = []; // Set[activeEffect] deps中存储了涉及到当前effect的属性
-  constructor(public fn, public scheduler) {}
+  constructor(public fn, public scheduler) { }
   run() {
     if (!this.active) {
       return this.fn();
