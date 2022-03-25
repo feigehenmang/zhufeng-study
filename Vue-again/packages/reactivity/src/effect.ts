@@ -42,6 +42,9 @@ export function track(target, key) {
     if (!keyMap) {
         objMap.set(key, (keyMap = new Set))
     }
+    trackEffects(keyMap)
+}
+export function trackEffects(keyMap) {
     const shouldTrack = !keyMap.has(activeEffect)
     if (shouldTrack && activeEffect) {
         keyMap.add(activeEffect)
@@ -53,18 +56,22 @@ export function trigger(target, key) {
     const objMap = targetMap.get(target)
     if (objMap) {
         const keySet = objMap.get(key)
-        if (keySet) {
-            keySet.forEach((effect) => {
-                // 当前effect中触发修改了同一effect 
-                if(effect !== activeEffect) {
+        triggerEffects(keySet)
+    }
+}
 
-                    if(effect.scheduler) {
-                        effect.scheduler()
-                    } else {
-                        effect.run()
-                    }
+export function triggerEffects(keySet) {
+    if (keySet) {
+        keySet.forEach((effect) => {
+            // 当前effect中触发修改了同一effect 
+            if(effect !== activeEffect) {
+
+                if(effect.scheduler) {
+                    effect.scheduler()
+                } else {
+                    effect.run()
                 }
-            })
-        }
+            }
+        })
     }
 }

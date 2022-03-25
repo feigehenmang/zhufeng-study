@@ -20,6 +20,7 @@ var VueReactivity = (() => {
   // packages/reactivity/src/index.ts
   var src_exports = {};
   __export(src_exports, {
+    computed: () => computed,
     effect: () => effect,
     reactive: () => reactive
   });
@@ -66,6 +67,9 @@ var VueReactivity = (() => {
     if (!keyMap) {
       objMap.set(key, keyMap = /* @__PURE__ */ new Set());
     }
+    trackEffects(keyMap);
+  }
+  function trackEffects(keyMap) {
     const shouldTrack = !keyMap.has(activeEffect);
     if (shouldTrack && activeEffect) {
       keyMap.add(activeEffect);
@@ -76,17 +80,20 @@ var VueReactivity = (() => {
     const objMap = targetMap.get(target);
     if (objMap) {
       const keySet = objMap.get(key);
-      if (keySet) {
-        keySet.forEach((effect2) => {
-          if (effect2 !== activeEffect) {
-            if (effect2.scheduler) {
-              effect2.scheduler();
-            } else {
-              effect2.run();
-            }
+      triggerEffects(keySet);
+    }
+  }
+  function triggerEffects(keySet) {
+    if (keySet) {
+      keySet.forEach((effect2) => {
+        if (effect2 !== activeEffect) {
+          if (effect2.scheduler) {
+            effect2.scheduler();
+          } else {
+            effect2.run();
           }
-        });
-      }
+        }
+      });
     }
   }
 
@@ -115,6 +122,50 @@ var VueReactivity = (() => {
       }
     });
     return proxy;
+  }
+
+  // packages/shared/src/index.ts
+  function isObject(v) {
+    return typeof v === "object" && v != null;
+  }
+
+  // packages/reactivity/src/computed.ts
+  var ComputedImpl = class {
+    constructor(getter, setter) {
+      this.getter = getter;
+      this.setter = setter;
+      this._dirty = true;
+      this.dep = /* @__PURE__ */ new Set();
+      const callback = () => {
+        trackEffects(this.dep);
+        if (!this._dirty) {
+          this._dirty = true;
+        }
+      };
+      this.effect = new ReactiveEffect(getter, callback);
+      this._value = this.effect.run();
+    }
+    get value() {
+      if (this._dirty) {
+        this._value = this.effect.run();
+        this._dirty = false;
+        triggerEffects(this.dep);
+      }
+      return this._value;
+    }
+    set value(v) {
+      this.setter(this._value);
+    }
+  };
+  function computed(getterOrOptions) {
+    let getter = getterOrOptions;
+    let setter = () => {
+    };
+    if (isObject(getterOrOptions)) {
+      getter = getter.get;
+      setter = getter.set;
+    }
+    return new ComputedImpl(getter, setter);
   }
   return __toCommonJS(src_exports);
 })();

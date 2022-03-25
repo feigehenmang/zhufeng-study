@@ -12,13 +12,22 @@
     <!-- <script src="../../../node_modules/vue/dist/vue.global.js"></script> -->
     <script>
         // const { effect, reactive} = Vue
-        const { effect, reactive} = VueReactivity
+        // const { effect, reactive, computed} = Vue
+        const { effect, reactive, computed} = VueReactivity
 
         const state = reactive({name: 'zyb', age: 13})
+        const computedValue = computed({
+            get() {
+                return state.age * 2
+            },
+            set(v) {
+                console.log(v)
+            }
+        })
         effect(() => {
             console.log('test')
-            state.age = Math.random()
-            app.innerHTML = `${state.name} 今年${state.age}了`
+            // state.age = Math.random()
+            app.innerHTML = `${state.name} 今年${state.age}了, ${computedValue.value}`
         })
         setInterval(() => {
             state.age ++
