@@ -18,19 +18,30 @@ interface IFruit {
   color: string;
   age: number;
 }
-
+// 必选参数变可选参数
 type Partial<T> = {
   [key in keyof T]?: T[key];
 };
-type Required<T> = {
-  [key in keyof T]-?: T[key];
-};
+// 可选参数变必选参数
+// type Required<T> = {
+//   [key in keyof T]-?: T[key];
+// };
 type Readonly<T> = {
   readonly [key in keyof T]: T[key];
 };
 type IFruitParital = Partial<IFruit>;
 type IFruitRequired = Required<IFruit>;
+// 必选参数 可选参数 变只读参数
 type IFruitReadonly = Readonly<IFruit>;
+
+interface IOb {
+  name?: string;
+  age?: number;
+}
+
+type IOType = Readonly<IOb>
+
+// 递归变可选参数
 type DeepParital<T> = {
   [key in keyof T]?: T[key] extends object ? DeepParital<T[key]> : T[key];
 };
@@ -57,7 +68,25 @@ interface IO {
 type Pick<T, K extends keyof T> = {
   [key in K]: T[key];
 };
+// 取出对应属性组成新对象
 type PickType = Pick<IO, "name" | "age">;
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+// type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+// 排除对应属性 留下的组成新对象
 type OmitType = Omit<IO, "name" | "age">;
-export {};
+// Record 返回新对象，传入的第一个参数为key 第二个参数为类型
+type RecodeType = Partial<Record<"name", string>>
+import { mySetInterVal } from './clear'
+let date = Date.now()
+const { start, clear } = mySetInterVal(() => {
+  console.log('timers', Date.now() - date)
+}, 1000, 1000)
+start()
+
+setTimeout(() => {
+  clear()
+}, 2000)
+
+
+import { ArrayDeepFlat } from './flat'
+console.log(ArrayDeepFlat([1,2,3,[2,3,[2,2]], [1,2]]))
+export { };
