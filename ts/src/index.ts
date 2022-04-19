@@ -8,9 +8,9 @@ const enum Stats {
 }
 
 const state = 0;
-console.log(Stats.active);
+// console.log(Stats.active);
 if (state == Stats.active) {
-  console.log(1);
+  // console.log(1);
 }
 
 interface IFruit {
@@ -76,17 +76,23 @@ type OmitType = Omit<IO, "name" | "age">;
 // Record 返回新对象，传入的第一个参数为key 第二个参数为类型
 type RecodeType = Partial<Record<"name", string>>
 import { mySetInterVal } from './clear'
+import { fib } from './fibSeq';
 let date = Date.now()
-const { start, clear } = mySetInterVal(() => {
-  console.log('timers', Date.now() - date)
-}, 1000, 1000)
-start()
+// const { start, clear } = mySetInterVal(() => {
+//   console.log('timers', Date.now() - date)
+// }, 1000, 1000)
+// start()
 
-setTimeout(() => {
-  clear()
-}, 2000)
+// setTimeout(() => {
+//   clear()
+// }, 2000)
 
 
 import { ArrayDeepFlat } from './flat'
-console.log(ArrayDeepFlat([1,2,3,[2,3,[2,2]], [1,2]]))
+import { mergeArr } from './mergeArr';
+// console.log(ArrayDeepFlat([1, 2, 3, [2, 3, [2, 2]], [1, 2]]))
+
+// console.log(mergeArr([[1, 2, 4], [2, 3, 7], [3, 5, 7], [4, 5, 8]]))
+// 1、1、2、3、5、8、13、21、34
+console.log(fib(9))
 export { };
