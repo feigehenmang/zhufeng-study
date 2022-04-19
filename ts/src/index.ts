@@ -94,5 +94,8 @@ import { mergeArr } from './mergeArr';
 
 // console.log(mergeArr([[1, 2, 4], [2, 3, 7], [3, 5, 7], [4, 5, 8]]))
 // 1、1、2、3、5、8、13、21、34
-console.log(fib(9))
+let d = Date.now()
+// console.log((d = Date.now()))
+console.log(fib(50))
+console.log(Date.now() -d)
 export { };
