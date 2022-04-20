@@ -57,3 +57,9 @@ let s1: startsWith<'123', ''>
 let s2: ReplaceStr<'hello!', '!', '1'>
 let s3: TrimRight<'he\n\t '>
 let s4: TrimLeft<'   he'>
+
+type getParamType<T extends Function> = T extends (...args: infer Args) => any ? Args : never
+
+let fn1: getParamType<(a: number) => void>
+
+
