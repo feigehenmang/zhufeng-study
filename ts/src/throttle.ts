@@ -4,7 +4,6 @@ export function throttle(fn: () => void, wait) {
         if (Date.now() - prev >= wait) {
             prev = Date.now()
             return fn.apply(this, args)
-
         }
     }
 }
