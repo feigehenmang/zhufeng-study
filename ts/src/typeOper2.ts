@@ -22,7 +22,7 @@ let p = {
     age: 19
 }
 
-type GetRef<T> = 'name' extends keyof T ? T extends {name: infer V|undefined} ? V: never : never
+type GetRef<T> = 'name' extends keyof T ? T extends {name: infer V} ? V: never : never
 
 let p1!: GetRef<typeof p>
 export { }
