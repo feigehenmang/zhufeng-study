@@ -58,10 +58,12 @@ type getArrExcludeLast<T extends unknown[]> = T extends [
 ]
   ? ExcludeType
   : never;
+type getArrUnion<T extends unknown[]> = T extends [...infer R] ? R[number] : never
 let f1: getArrFirst<["1", 2, 3]>; // f1: '1'
 let l1: getArrLast<["1", 2, 3]>; // l1: 3
 let o1: getArrExcludeFirst<[1, 2, 3]>; // o1: [2,3]
 let o2: getArrExcludeLast<[1, 2, 3]>; // o1: [1,2]
+let o3: getArrUnion<[1, '2']>
 // 模式匹配 针对字符串
 type startsWith<T extends string, Prefix extends string> = Prefix extends ""
   ? false
@@ -93,9 +95,7 @@ type getParamType<T extends Function> = T extends (...args: infer Args) => any
   : never;
 
 let fn1: getParamType<(a: number) => void>;
-
 // 取函数返回值
-
 type getReturnType<T> = T extends (...args: any[]) => infer ReturnType
   ? ReturnType
   : never;
