@@ -81,5 +81,19 @@ type RecordType = Record<1, number>
 // {
 //     1: number;
 // }
+type Partial<T extends object> = {
+    [key in keyof T]?: T[key]
+}
+type PartialType = Partial<RecordType> // 给索引类型的每个key添加可选参数
+// type PartialType = {
+//     1?: number | undefined;
+// }
+type Readonly<T extends object> = {
+    readonly [key in keyof T]: T[key]
+}
+type ReadonlyType = Readonly<PartialType> // 给索引类型的每个key添加只读
+// type ReadonlyType = {
+//     readonly 1?: number | undefined;
+// }
 
 export {}
