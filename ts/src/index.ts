@@ -76,7 +76,7 @@ type OmitType = Omit<IO, "name" | "age">;
 // Record 返回新对象，传入的第一个参数为key 第二个参数为类型
 type RecodeType = Partial<Record<"name", string>>
 import { mySetInterVal } from './clear'
-import { fib } from './fibSeq';
+import { fib, fibCache, fibLoop } from './fibSeq2';
 let date = Date.now()
 // const { start, clear } = mySetInterVal(() => {
 //   console.log('timers', Date.now() - date)
@@ -94,8 +94,8 @@ import { mergeArr } from './mergeArr';
 
 // console.log(mergeArr([[1, 2, 4], [2, 3, 7], [3, 5, 7], [4, 5, 8]]))
 // 1、1、2、3、5、8、13、21、34
-let d = Date.now()
+// let d = Date.now()
 // console.log((d = Date.now()))
-console.log(fib(50))
-console.log(Date.now() -d)
+console.log(fibLoop(30))
+// console.log(Date.now() -d)
 export { };
