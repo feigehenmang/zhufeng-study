@@ -95,5 +95,11 @@ type ReadonlyType = Readonly<PartialType> // 给索引类型的每个key添加�
 // type ReadonlyType = {
 //     readonly 1?: number | undefined;
 // }
-
+type Required<T extends object> = {
+    [k in keyof T]-?: T[k]
+}
+type RequiredType = Required<PartialType> // 给索引类型的每个key添加必填
+//  {
+//     1: number;
+// }
 export {}
