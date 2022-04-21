@@ -102,4 +102,8 @@ type RequiredType = Required<PartialType> // 给索引类型的每个key添加�
 //  {
 //     1: number;
 // }
+type Mutable<T extends object> = {
+    -readonly [k in keyof T]: T[k]
+}
+type MutableType = Mutable<ReadonlyType>
 export {}
