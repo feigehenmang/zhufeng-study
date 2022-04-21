@@ -72,3 +72,14 @@ type o3 = KeyToUppercase<o1>
 //     AGE: number;
 //     ADDRESS: string;
 // }
+
+// Record 创建索引类型
+type Record<T extends string|number|symbol, K> = {
+    [key in T]: K
+}
+type RecordType = Record<1, number>
+// {
+//     1: number;
+// }
+
+export {}
