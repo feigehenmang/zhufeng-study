@@ -106,4 +106,21 @@ type Mutable<T extends object> = {
     -readonly [k in keyof T]: T[k]
 }
 type MutableType = Mutable<ReadonlyType>
+
+
+type FilterByValueType<T extends object, ValueType> = {
+    [k in keyof T as ValueType extends T[k] ? k : never]: T[k]
+}
+
+type F1 = {
+    name: string,
+    age: number,
+    address: string[]
+}
+
+type newValueType = FilterByValueType<F1, number|string>
+// {
+//     name: string;
+//     age: number;
+// }
 export {}
