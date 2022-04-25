@@ -25,5 +25,12 @@ type StrLength<T extends string, Result extends unknown[] = []> = T extends `${s
 type strLength = StrLength<'test'>
 
 // TODO 比较大小
+type Bigger<A extends number, B extends number, Result extends unknown[] = []> = A extends B ? false : Result['length'] extends A ? false : Result['length'] extends B ? true : Bigger<A, B, [...Result, unknown]>
+
+type bigger = Bigger<5,3>
 // TODO 斐波那契数列
+type Fib<Prev extends unknown[], Curr extends unknown[], IndexArr extends unknown[] = [], Num extends number = 1> = IndexArr['length'] extends Num ? Curr['length'] : Fib<Curr, [...Prev, ...Curr], [...IndexArr, unknown], Num>
+
+type fib1 = Fib<[1], [], [], 8>
+
 export {}
