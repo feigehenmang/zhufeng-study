@@ -32,4 +32,9 @@ type NotEquals<A, B> = IsEqual2<A, B> extends true ? false : true
 // 元组的length属性为数值的具体值
 type IsTuple<T> = T extends readonly unknown[] ? NotEquals<T['length'], number> : false
 type bol6 = IsTuple<number[]>
+
+//  逆变 协变
+//  父子类型  更具体的就是子类型
+// 允许父类型赋值给子类型 叫逆变
+// 允许子类型复制给父类型 叫协变
 export {}
