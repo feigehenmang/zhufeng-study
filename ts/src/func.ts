@@ -4,7 +4,7 @@ export function cb(callback: (val: string | number) => number | string) {
 // 逆变 当涉及到函数入参时，此时函数主体只接受string，但是cb函数的参数要求可能是string or number，此时如果传入number，会导致函数无法正常执行
 // 此时 函数的执行在cb函数内部，而cb函数的入参有约束，所以在编写入参函数时需要要求函数的参数类型大于cb的约束
 // 外部函数参数约束只能大于内部函数约束
-cb((val: string) => {
+cb((val: string|number|boolean) => {
   console.log(val);
   return "123";
 });
@@ -45,3 +45,9 @@ ajax('get', (code: number|string): {code: number|string, age: number} => {
   console.log(code)
   return {code, age: 1}
 })
+
+
+function fn<T, k>(a: T): T{
+  return a
+}
+let r = fn(1)
