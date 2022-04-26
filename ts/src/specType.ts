@@ -37,4 +37,57 @@ type bol6 = IsTuple<number[]>
 //  父子类型  更具体的就是子类型
 // 允许父类型赋值给子类型 叫逆变
 // 允许子类型复制给父类型 叫协变
-export {}
+
+// unionToIntersection
+type UnionToIntersection<T> = (T extends T ? (v: T) => unknown : never) extends (v: infer R) => unknown ? R : never
+
+type inter1 = UnionToIntersection<{ name: 'test' } | { age: 19 }>
+// {
+//     name: 'test';
+// } & {
+//     age: 19;
+// }
+
+type pick1 = Pick<{ name?: string, age: number }, 'name'>
+type pick2 = {} extends Pick<{ name?: string, age: number }, 'name'> ? true : false; // true
+type pick3 = {} extends Pick<{ name: string, age: number }, 'name'> ? true : false; // false
+
+type GetPartialProp<T extends Record<string, any>> = {
+    [K in keyof T as {} extends Pick<T, K> ? K : never]: T[K]
+}
+type pick4 = GetPartialProp<{ name: string, age: number, address?: string }>
+// {
+//     address?: string | undefined;
+// }
+type GetRequiredProp<T extends Record<string, any>> = {
+    [K in keyof T as {} extends Pick<T, K> ? never : K]: T[K]
+}
+type pick5 = GetRequiredProp<{ name: string, age: number, address?: string }>
+// {
+//     name: string;
+//     age: number;
+// }
+// 索引签名不能构造成字符串字面量类型，因为它没有名字，而其他索引可以。
+// K extends `${infer s}`
+type RemoveIndexSignature<T extends Record<string, any>> = {
+    [K in keyof T as K extends `${infer s}` ? K : never]: T[K]
+}
+type type1 = { [k: string]: any, seelp(): void }
+type pick6 = RemoveIndexSignature<type1>
+// keyof 只能拿到 class 的 public 索引，private 和 protected 的索引会被忽略。
+class Animal {
+    public name: string;
+    private age: number;
+    protected address: string;
+    constructor() {
+        this.name = 'test'
+        this.age = 13
+        this.address = ''
+    }
+}
+type GetPublicProps<T extends Record<string, any>> = {
+    [K in keyof T]: T[K]
+}
+type publicKeys = GetPublicProps<Animal>
+
+export { }
