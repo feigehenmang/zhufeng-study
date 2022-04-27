@@ -95,4 +95,54 @@ type o7 = ReadonlyCustom<o5>
 //     readonly age: number;
 //     readonly address: string;
 // }
+type PickCustom<T, K extends keyof T> = {
+    [k in  K]: T[k]
+}
+type o8 = Pick<o5, 'name'|'address'>
+type o9 = PickCustom<o5, 'name'|'address'>
+// type a = keyof {}
+// {
+//     name: string;
+//     address: string;
+// }
+type RecordCustom<T extends keyof any, K> = {
+    [k in T]: K
+}
+type o10 = Record<'a'|'b', string>
+type o12 = RecordCustom<'a'|'b', string>
+// {
+//     a: string;
+//     b: string;
+// }
+type o11 = Record<string, any>
+// {
+//     [x: string]: any;
+// }
+// 联合类型处理
+
+type union1 = Exclude<'a'|'b'|'c'|'d', 'a'|'e'> // "b" | "c" | "d" 从联合类型中移除某些类型
+type EcludeCustom<T, K> = T extends K ? never: T
+type union2 = EcludeCustom<'a'|'b'|'c'|'d', 'a'> // "b" | "c" | "d"
+
+type union3 = Extract<'a'|'b'|'c'|'d', 'a'|'c'|'e'> // "a" | "c" 取交集
+type ExtractCustom<T, K> = T extends K ? T : never
+type union4 = ExtractCustom<'a'|'b'|'c'|'d', 'a'|'c'|'e'>
+
+type o13 = Omit<{name: string, age: number, address: string}, 'name'> // 反选生成新的索引类型
+// { 
+//     age: number;
+//     address: string;
+// }
+type OmitCustom<T extends Record<string, any>, k> = Pick<T, Exclude<keyof T, k>>
+type o14 = OmitCustom<{name: string, age: number, address: string}, 'name'>
+// {
+//     age: number;
+//     address: string;
+// }
+// Promise
+type p1 = Promise<any>
+type p2 = Awaited<p1> //  any
+type AwaitedCustom<T> = T extends Promise<infer R> ? AwaitedCustom<R> : T
+type p3 = AwaitedCustom<p1> //any
+
 export {}
