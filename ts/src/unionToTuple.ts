@@ -8,3 +8,5 @@ type Union4 = ReturnType<Union3>
 type UnionToTuple<T> = UnionToInter<T extends T ? () => T : never> extends (...args: unknown[]) => infer R ? [...UnionToTuple<Exclude<T, R>>, R] : []
 
 type Union5 = UnionToTuple<'a'|'b'|'c'|'d'>
+
+export {}
