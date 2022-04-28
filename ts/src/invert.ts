@@ -21,5 +21,5 @@ let priteName = function(val: Person) {
     console.log(val.name)
 }
 // 父类型可以赋值给子类型 逆变
-priteAddress = priteName
-priteName = priteAddress
+priteAddress = priteName // 父可以赋值给子的原因是父函数参数特征子函数都有，且父函数的实现不会牵扯到子函数参数中额外的属性
+priteName = priteAddress // 子不可以赋值给父的原因是子函数的参数特征父函数不全部包含
