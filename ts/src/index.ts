@@ -98,4 +98,5 @@ import { mergeArr } from './mergeArr';
 // console.log((d = Date.now()))
 console.log(fibLoop(30))
 // console.log(Date.now() -d)
+import './array'
 export { };
