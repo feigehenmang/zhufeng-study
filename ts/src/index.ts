@@ -100,3 +100,4 @@ console.log(fibLoop(30))
 // console.log(Date.now() -d)
 import './array'
 export { };
+import './sort'
