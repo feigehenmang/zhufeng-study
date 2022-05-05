@@ -1,4 +1,4 @@
-import { FixedSizeList } from 'react-window'
+import { FixedSizeList } from '../react-window'
 import './ReactWindow.css'
 const Row = ({ index, style }) => (
     <div className={index % 2 ? 'ListItemOdd' : 'ListItemEven'} style={style}>Row{index}</div>
