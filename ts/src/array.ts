@@ -181,7 +181,7 @@ function threeSum(nums: number[]) {
     return result
 }
 
-console.log(threeSum([-1, 0, 1, 2, -1, -4]))
+// console.log(threeSum([-1, 0, 1, 2, -1, -4]))
 
 function validPalindrome(str:string) {
     let i = 0, j = str.length - 1
@@ -215,9 +215,49 @@ function validPalindrome(str:string) {
         return true
     }
 }
-console.log('validPalindrome', validPalindrome('abacd'))
+// console.log('validPalindrome', validPalindrome('abacd'))
 // 
 
+function isPalindrome(str: string): boolean {
+    for(let i = 0; i < Math.floor(str.length/2); i++) {
+        if(str[i] !== str[str.length - i - 1]) return false
+    }
+    return true
+}
+function validPalindrome2(str: string): boolean {
+    let i = 0, j = str.length - 1
+    while(i < j) {
+        if(str[i]===str[j]) {
+            i++
+            j--
+        }
+        if(str[i]!==str[j]) {
+            if(isPalindrome(++i, j)) {
+                return true
+            }
+            if(isPalindrome(i, --j)) {
+                return true
+            }
+            return false
+        }
+    }
+
+    function isPalindrome(start: number, end: number) {
+        while(start < end) {
+            if(str[start] !== str[end]) {
+                return false
+            } else {
+                start ++
+                end --
+            }
+        }
+        return true
+    }
+    return true
+}
+console.log('isPalindrome', isPalindrome('abcba'))
+console.log('isPalindrome', isPalindrome('abcbaa'))
+console.log('validPalindrome2', validPalindrome2('abcbaa'))
 function transformStr(str: string){
     const regexp1 = /\s*([+|-]?[0-9]*)/
 }

@@ -96,7 +96,7 @@ import { mergeArr } from './mergeArr';
 // 1、1、2、3、5、8、13、21、34
 // let d = Date.now()
 // console.log((d = Date.now()))
-console.log(fibLoop(30))
+// console.log(fibLoop(30))
 // console.log(Date.now() -d)
 import './array'
 export { };

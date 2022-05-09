@@ -1,8 +1,8 @@
 // sort
 let arr = [1,3,4,2,1,3,45,5,6]
 
-console.log(arr.sort((a,b) => a-b)) // 升序 [1, 1, 2, 3, 3, 4, 5, 6, 45]
-console.log(arr.sort((a,b) => b-a)) // 降序 [45, 6, 5, 4, 3, 3, 2, 1, 1]
+// console.log(arr.sort((a,b) => a-b)) // 升序 [1, 1, 2, 3, 3, 4, 5, 6, 45]
+// console.log(arr.sort((a,b) => b-a)) // 降序 [45, 6, 5, 4, 3, 3, 2, 1, 1]
 
 let arr2 = [
     {value: 3, maxValue: 100},

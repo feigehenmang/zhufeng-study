@@ -31,4 +31,6 @@ declare function merge(nums1: number[], m: number, nums2: number[], n: number): 
 declare function threeSum2(nums: number[]): number[][];
 declare function threeSum(nums: number[]): number[][];
 declare function validPalindrome(str: string): boolean | undefined;
+declare function isPalindrome(str: string): boolean;
+declare function validPalindrome2(str: string): boolean;
 declare function transformStr(str: string): void;
