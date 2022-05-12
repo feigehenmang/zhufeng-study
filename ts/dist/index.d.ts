@@ -1,3 +1,2 @@
-import './array';
 export {};
-import './sort';
+import './list2';

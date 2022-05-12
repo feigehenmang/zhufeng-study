@@ -1,78 +1,43 @@
 (function () {
     'use strict';
 
-    // console.log(getIndexs(nums, 9))
-    // console.log(getIndexsByMap(nums, 9))
-    // 给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
-    // nums1 = [1,2,3,0,0,0], m = 3
-    // nums2 = [2,5,6], n = 3
-    // 输出: [1,2,2,3,5,6]
-    function merge(nums1, m, nums2, n) {
-        let i = m - 1, j = n - 1, z = m + n - 1;
-        while (i >= 0 && j >= 0) {
-            if (nums1[i] > nums2[j]) {
-                nums1[z] = nums1[i];
-                z--;
-                i--;
+    // 链表操作
+    class ListNode {
+    }
+    const list1 = new ListNode();
+    list1.value = 1;
+    list1.next = new ListNode();
+    list1.next.value = 2;
+    list1.next.next = new ListNode();
+    list1.next.next.value = 4;
+    const list2 = new ListNode();
+    list2.value = 1;
+    list2.next = new ListNode();
+    list2.next.value = 3;
+    list2.next.next = new ListNode();
+    list2.next.next.value = 4;
+    // console.log(list1, list2)
+    console.log(mergeList(list1, list2));
+    // 单向链表的合并
+    function mergeList(l1, l2) {
+        const r = new ListNode();
+        let cur = r;
+        while (l1 && l2) {
+            // console.log(l1, l2)
+            if (l1.value >= l2.value) {
+                cur.next = l2;
+                l2 = l2.next;
             }
             else {
-                nums1[z] = nums2[j];
-                z--;
-                j--;
+                cur.next = l1;
+                l1 = l1.next;
             }
+            cur = cur.next;
         }
-        while (j >= 0) {
-            nums1[z] = nums2[j];
-            z--;
-            j--;
-        }
-        // console.log(i, j, nums1)
-        return nums1;
+        // console.log(l1, l2)
+        cur.next = (l1 === null || l1 === void 0 ? void 0 : l1.next) ? l1 : l2;
+        return r;
     }
-    merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3);
-    // console.log('validPalindrome', validPalindrome('abacd'))
-    // 
-    function isPalindrome(str) {
-        for (let i = 0; i < Math.floor(str.length / 2); i++) {
-            if (str[i] !== str[str.length - i - 1])
-                return false;
-        }
-        return true;
-    }
-    function validPalindrome2(str) {
-        let i = 0, j = str.length - 1;
-        while (i < j) {
-            if (str[i] === str[j]) {
-                i++;
-                j--;
-            }
-            if (str[i] !== str[j]) {
-                if (isPalindrome(++i, j)) {
-                    return true;
-                }
-                if (isPalindrome(i, --j)) {
-                    return true;
-                }
-                return false;
-            }
-        }
-        function isPalindrome(start, end) {
-            while (start < end) {
-                if (str[start] !== str[end]) {
-                    return false;
-                }
-                else {
-                    start++;
-                    end--;
-                }
-            }
-            return true;
-        }
-        return true;
-    }
-    console.log('isPalindrome', isPalindrome('abcba'));
-    console.log('isPalindrome', isPalindrome('abcbaa'));
-    console.log('validPalindrome2', validPalindrome2('abcbaa'));
 
 })();
 //# sourceMappingURL=bundle.js.map
