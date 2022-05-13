@@ -1,6 +1,6 @@
 // 链表操作
 
-class ListNode {
+export class ListNode {
     value?: any
     next?: ListNode
 }
@@ -84,13 +84,13 @@ function deleteDuplicates(list: ListNode) {
     }
     return dummy.next
 }
-function createList(values: any[]) {
+export function createList(values: any[]) {
     let list = new ListNode()
     let curr = list
-    while(values.length > 0) {
+    while(values[0]) {
         curr.value = values[0]
         values.shift()
-        if(values.length > 0) {
+        if(values[0]) {
             curr.next = new ListNode()
             curr = curr.next
         }
@@ -151,5 +151,7 @@ function reverseList(list: ListNode) {
     } 
     return prev
 }
-console.log(reverseList(list6))
+// console.log(reverseList(list6))
+
+
 export {}

@@ -102,4 +102,6 @@ import { mergeArr } from './mergeArr';
 export { };
 // import './sort'
 // import './code2'
-import './list2'
+// import './list2'
+// import './list3'
+import './list4'
