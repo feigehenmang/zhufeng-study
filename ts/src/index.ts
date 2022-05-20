@@ -108,4 +108,5 @@ export { };
 
 // import './stack'
 // import './queue'
-import './binaryTree'
+// import './binaryTree'
+import './bst'

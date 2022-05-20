@@ -1,2 +1,2 @@
 export {};
-import './binaryTree';
+import './bst';

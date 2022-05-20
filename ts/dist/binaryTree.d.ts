@@ -4,3 +4,4 @@ export declare class TreeNode {
     right: TreeNode | undefined;
     constructor(val: any);
 }
+export {};
