@@ -43,5 +43,17 @@ function searchDeep(root: TreeNode, n: number): any {
 }
 console.log(search(tree1, 3))
 console.log(searchDeep(tree1, 9))
-
+function insertToBSTTree(root: TreeNode, val: number) {
+    if(!root) {
+        root = new TreeNode(val)
+        return root
+    }
+    if(root.val > val && root.right) {
+        root.right = insertToBSTTree(root.right, val)
+    }
+    if(root.val < val && root.left) {
+        root.left = insertToBSTTree(root.left, val)
+    }
+    return root
+}
 export { }
