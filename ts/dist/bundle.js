@@ -32,42 +32,24 @@
     tree1.right.right = new TreeNode(9);
     tree1.left.left = new TreeNode(1);
     tree1.left.right = new TreeNode(4);
-    function search(root, n) {
-        let stack = [root];
-        while (stack.length) {
-            let value = stack.shift();
-            if ((value === null || value === void 0 ? void 0 : value.val) === n) {
-                return value;
-            }
-            if ((value === null || value === void 0 ? void 0 : value.right) && (value === null || value === void 0 ? void 0 : value.val) < n) {
-                stack.push(value.right);
-            }
-            if ((value === null || value === void 0 ? void 0 : value.left) && value.val > n) {
-                stack.push(value.left);
-            }
-        }
-    }
-    function searchDeep(root, n) {
-        // 若 root 为空，查找失败，直接返回
+    // console.log(search(tree1, 3))
+    // console.log(searchDeep(tree1, 9))
+    function insertToBSTTree(root, val) {
         if (!root) {
-            return;
-        }
-        // 找到目标结点，输出结点对象
-        if (root.val === n) {
-            // console.log('目标结点是：', root)
+            // console.log(val);
+            root = new TreeNode(val);
             return root;
         }
-        else if ((root === null || root === void 0 ? void 0 : root.left) && root.val > n) {
-            // 当前结点数据域大于n，向左查找
-            return searchDeep(root.left, n);
+        if (root.val > val) {
+            root.left = insertToBSTTree(root.left, val);
+            console.log(root.left);
         }
-        else {
-            // 当前结点数据域小于n，向右查找
-            return root.right && searchDeep(root.right, n);
+        if (root.val < val) {
+            root.right = insertToBSTTree(root.right, val);
         }
+        return root;
     }
-    console.log(search(tree1, 3));
-    console.log(searchDeep(tree1, 9));
+    console.log(insertToBSTTree(tree1, 5));
 
 })();
 //# sourceMappingURL=bundle.js.map
