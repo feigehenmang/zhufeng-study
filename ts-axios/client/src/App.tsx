@@ -1,23 +1,53 @@
 import { useEffect, useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import axios from './axios'
+import axios, { AxiosRequestConfig, AxiosResponse } from './axios'
+// interceptor
+axios.interceptors.request.use((config: AxiosRequestConfig) => {
+  config?.headers?.name ? config.headers.name += '1' : config!.headers!.name = 'name'
+  return config
+})
+axios.interceptors.request.use((config: AxiosRequestConfig) => {
+  config?.headers?.name ? config.headers.name += '2' : config!.headers!.name = 'name'
+  return config
+})
+axios.interceptors.request.use((config: AxiosRequestConfig) => {
+  config?.headers?.name ? config.headers.name += '3' : config!.headers!.name = 'name3'
+  return config
+})
+axios.interceptors.response.use((config: AxiosResponse) => {
+  config.data.user +=1
+  return config
+})
+axios.interceptors.response.use((config: AxiosResponse) => {
+  config.data.user +=2
+  return config
+})
+axios.interceptors.response.use((config: AxiosResponse) => {
+  config.data.user +=3
+  return config
+})
+
 const baseUrl = 'http://localhost:8080'
 type User = {
   user: string,
   age: number
 }
-axios<User>({
+axios({
   url: baseUrl + '/get',
   method: 'get',
   params: {
     user: 'zs',
     age: 14
+  },
+  headers: {
+    name: 'name'
   }
-}).then(result => {
+}).then((result: AxiosResponse<User>) => {
   console.log(result)
+  // result.data.
   // result.data.user
-}, err => {
+}, (err: any) => {
   console.log(err)
 })
 
