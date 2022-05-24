@@ -1,2 +1,1 @@
-import "./prototype";
 import "./single";
