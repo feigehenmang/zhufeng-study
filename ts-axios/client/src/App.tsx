@@ -28,6 +28,9 @@ axios.interceptors.response.use((config: AxiosResponse) => {
   return config
 })
 
+
+const CancelToken = axios.CancelToken
+const token = CancelToken.source()
 const baseUrl = 'http://localhost:8080'
 type User = {
   user: string,
@@ -40,6 +43,7 @@ axios({
     user: 'zs',
     age: 14
   },
+  cancelToken: token.token,
   headers: {
     name: 'name'
   }
@@ -48,8 +52,14 @@ axios({
   // result.data.
   // result.data.user
 }, (err: any) => {
-  console.log(err)
+  if(axios.isCancel(err) ){
+    console.log('cancel', err)
+    return
+  }
+  console.log(err) 
 })
+
+token.cancel('clicked ajax cancel')
 
 function App() {
   const [count, setCount] = useState(0)

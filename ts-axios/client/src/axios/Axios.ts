@@ -40,6 +40,13 @@ export class Axios {
         : config.url + "?" + params;
       request.open(config.method, url, true);
       request.responseType = "json";
+      if (config.cancelToken) {
+        config.cancelToken.then((message: any) => {
+          // console.log(message);
+          reject(message);
+          request.abort();
+        });
+      }
       request.onreadystatechange = function () {
         if (request.readyState == 4) {
           // console.log(request.status);
@@ -52,6 +59,7 @@ export class Axios {
               config: config,
               request: request,
             };
+
             resolve(response);
           } else {
             reject();

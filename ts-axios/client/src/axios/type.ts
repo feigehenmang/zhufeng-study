@@ -5,6 +5,7 @@ export interface AxiosRequestConfig {
   method: Method;
   params: any;
   headers?: Record<string, string | string[]>;
+  cancelToken?: any;
 }
 export type AxiosResponse<T = any> = T extends any
   ? {
