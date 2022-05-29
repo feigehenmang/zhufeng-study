@@ -19,7 +19,8 @@ function resolvePlugin(config) {
 
       if (id.startsWith(".")) {
         // 相对路径
-        const baseDir = path.baseDir(id);
+        console.log(path);
+        const baseDir = path.dirname(id);
         const fsPath = path.resolve(baseDir, id);
         return { id: fsPath };
       }
