@@ -34,6 +34,7 @@
 // // );
 import React from "./react";
 import ReactDOM from "./react-dom";
+
 class Counter extends React.Component {
   constructor(props) {
     super(props);
@@ -42,6 +43,14 @@ class Counter extends React.Component {
   handleClick = () => {
     this.setState({ number: this.state.number + 1 });
     console.log(this.state);
+    this.setState({ number: this.state.number + 1 });
+    console.log(this.state);
+    setTimeout(() => {
+      this.setState({ number: this.state.number + 1 });
+      console.log(this.state);
+      this.setState({ number: this.state.number + 1 });
+      console.log(this.state);
+    });
   };
   render() {
     return (
@@ -53,4 +62,42 @@ class Counter extends React.Component {
     );
   }
 }
-ReactDOM.render(<Counter title="计数器" />, document.getElementById("root"));
+function User(props, ref) {
+  ref.current = {
+    getValue: function () {
+      return input.current.value;
+    },
+  };
+  const input = React.createRef();
+  return (
+    <div>
+      <input ref={input} />
+    </div>
+  );
+}
+const ForwardUser = React.forwardRef(User);
+console.log(ForwardUser);
+export class Num extends React.Component {
+  constructor(props) {
+    super(props);
+    this.a = React.createRef();
+    this.b = React.createRef();
+    this.result = React.createRef();
+  }
+  handleClick = () => {
+    console.log(this.a);
+    this.result.current.value =
+      this.a.current.getValue() + this.b.current.value;
+  };
+  render() {
+    return (
+      <div>
+        <ForwardUser ref={this.a} />
+        <input ref={this.b} />
+        <button onClick={this.handleClick}>=</button>
+        <input ref={this.result} />
+      </div>
+    );
+  }
+}
+ReactDOM.render(<Num title="计数器" />, document.getElementById("root"));
