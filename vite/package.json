@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "connect": "^3.7.0",
+    "vite": "^2.9.9",
+    "vue": "^3.2.35"
+  }
+}

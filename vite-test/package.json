@@ -1,0 +1,20 @@
+{
+  "name": "vite-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "connect": "^3.7.0",
+    "esbuild": "^0.14.39",
+    "fs-extra": "^10.1.0",
+    "resolve": "^1.22.0",
+    "serve-static": "^1.15.0"
+  }
+}

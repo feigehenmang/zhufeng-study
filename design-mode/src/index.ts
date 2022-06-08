@@ -1,0 +1,2 @@
+// import "./prototype";
+import "./single";
