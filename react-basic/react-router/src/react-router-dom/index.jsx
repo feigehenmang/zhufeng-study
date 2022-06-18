@@ -1,4 +1,4 @@
-import { Router } from '../react-router'
+import { Router, useNavigate } from '../react-router'
 import React, { useRef, useState, useLayoutEffect } from 'react'
 import { createBrowserHistory, createHashHistory } from '../history'
 export function BrowserRouter(props) {
@@ -11,7 +11,12 @@ export function BrowserRouter(props) {
         action: history.action,
         location: history.location
     })
-    useLayoutEffect(() => history.listen(setState), [history])
+    useLayoutEffect(() => {
+        history.listen((...args) => {
+            console.log('change', history, args)
+            setState(...args)
+        })
+    }, [history])
     return <Router children={props.children} location={state.location}
         navigationType={state.action}
         navigator={history} />
@@ -33,5 +38,14 @@ export function HashRouter(props) {
         navigator={history} />
 }
 
+
+export function Link({ to, children, ...rest }) {
+    const navigate = useNavigate()
+    const handleClick = ev => {
+        ev.preventDefault()
+        navigate(to)
+    }
+    return <a {...rest} href={to} onClick={handleClick}>{ children }</a>
+}
 
 export * from '../react-router'

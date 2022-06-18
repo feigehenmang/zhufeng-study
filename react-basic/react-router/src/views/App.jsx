@@ -1,8 +1,9 @@
 import React from 'react'
-import { Routes, Route, BrowserRouter, Link } from 'react-router-dom'
+import { Routes, Route, BrowserRouter, Link } from '../react-router-dom'
 import Home from './Home'
 import User from './User'
 import Profile from './Profile'
+import Post from './Post'
 export default function App() {
     return <BrowserRouter>
         <ul>
@@ -10,16 +11,20 @@ export default function App() {
                 <Link to="/">Home</Link>
             </li>
             <li>
-                <Link to="user">User</Link>
+                <Link to="/user">User</Link>
             </li>
             <li>
-                <Link to="profile">Profile</Link>
+                <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+                <Link to="/post/13">Profile</Link>
             </li>
         </ul>
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="user" element={<User />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="/user" element={<User />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/post/:id" element={<Post />} />
         </Routes>
     </BrowserRouter>
 }
