@@ -1,9 +1,10 @@
 import React from 'react'
-import { Routes, Route, BrowserRouter, Link } from '../react-router-dom'
+import { Routes, Route, BrowserRouter, Link } from 'react-router-dom'
 import Home from './Home'
 import User from './User'
 import Profile from './Profile'
 import Post from './Post'
+import { Auth } from './Auth'
 export default function App() {
     return <BrowserRouter>
         <ul>
@@ -24,7 +25,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/user" element={<User />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/post/:id" element={<Post />} />
+            <Route path="/post/:id" element={<Auth children={<Post></Post>} />} />
         </Routes>
     </BrowserRouter>
 }
