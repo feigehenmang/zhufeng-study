@@ -4,6 +4,7 @@ import Home from './Home'
 import User from './User'
 import Profile from './Profile'
 import Post from './Post'
+import Count from './Count'
 import { Auth } from './Auth'
 export default function App() {
     return <BrowserRouter>
@@ -18,7 +19,10 @@ export default function App() {
                 <Link to="/profile">Profile</Link>
             </li>
             <li>
-                <Link to="/post/13">Profile</Link>
+                <Link to="/post/13">Post</Link>
+            </li>
+            <li>
+                <Link to="/count">Count</Link>
             </li>
         </ul>
         <Routes>
@@ -26,6 +30,7 @@ export default function App() {
             <Route path="/user" element={<User />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/post/:id" element={<Auth children={<Post></Post>} />} />
+            <Route path="/count" element={<Count ></Count>} />
         </Routes>
     </BrowserRouter>
 }
