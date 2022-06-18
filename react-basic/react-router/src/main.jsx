@@ -3,5 +3,5 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './views/App'
 import store from './store'
-
+import '../doc/compose'
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))
