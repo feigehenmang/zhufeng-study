@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route, BrowserRouter, Link } from 'react-router-dom'
+import { HistoryRouter} from 'redux-first-history/rr6'
 import Home from './Home'
 import User from './User'
 import Profile from './Profile'
@@ -7,8 +8,9 @@ import Post from './Post'
 import Count from './Count'
 import Count2 from './Count2'
 import { Auth } from './Auth'
+import { history } from '../store'
 export default function App() {
-    return <BrowserRouter>
+    return <HistoryRouter history={history}>
         <ul>
             <li>
                 <Link to="/">Home</Link>
@@ -37,5 +39,5 @@ export default function App() {
             <Route path="/count" element={<Count ></Count>} />
             <Route path="/count2" element={<Count2 ></Count2>} />
         </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
 }

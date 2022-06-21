@@ -17,4 +17,7 @@ const reducer = Object.keys(reducerModule).reduce((memo, reducerKey) => {
   }
   return memo;
 }, {});
+export function addReducer(key, value) {
+  reducer[key] = value
+}
 export default reducer;
